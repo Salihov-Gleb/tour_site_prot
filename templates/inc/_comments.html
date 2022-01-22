@@ -1,0 +1,24 @@
+<h4 class="mb-2">Комментарии:</h4>
+<div class="comment w-50">
+    {% for comment in post.comment_set.all %}
+    <ul class="list-group">
+        <li class="list-group-item active" aria-current="true">
+            <div class="comment-name">{{ comment.author.username }}</div>
+        </li>
+        <li class="list-group-item"><p class="comment-text">{{ comment.text }}</p></li>
+        <li class="list-group-item">
+            <div class="comment-bottom d-flex align-content-center">
+                <div class="comment-rate me-3">Оценка: {{ comment.rate }}/5</div>
+                <div class="comment-date me-3">{{ comment.datetime }}</div>
+                {% if request.user.is_authenticated and request.user.id == comment.author.id %}
+                <div class="comment-remove ms-auto">
+                    <a href="{% url 'delete_comment' pk=comment.pk %}" class="btn btn-primary">Удалить</a>
+                </div>
+                {% endif %}
+            </div>
+        </li>
+    </ul>
+    <br>
+    {% endfor %}
+</div>
+</div>

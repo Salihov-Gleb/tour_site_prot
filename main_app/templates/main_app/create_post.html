@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Новое объявление
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid mt-3">
+    <h1>Новое объявление</h1>
+    <hr>
+    <form enctype="multipart/form-data" action="{% url 'create_post' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <hr>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+{% endblock %}

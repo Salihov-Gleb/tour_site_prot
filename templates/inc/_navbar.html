@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+    <div class="container-fluid">
+        <a class="navbar-brand me-4" href="{% url 'main' %}">Главная</a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'my_posts' %}">Мои объявления</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'create_post' %}">Добавить объявление</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'logout' %}">Выйти</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'login' %}">Авторизация</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'signup' %}">Регистрация</a>
+                </li>
+                {% endif %}
+            </ul>
+            <span class="navbar-text">
+              {% if request.user.is_authenticated %}
+              Добро пожаловать, {{ user.username }}
+              {% endif %}
+            </span>
+            <form class="d-flex ms-3" action="{% url 'search_post' %}" method="get">
+                <input class="form-control me-2" name="q" type="text" placeholder="Поиск...">
+                <button class="btn btn-outline-light" type="submit">Поиск</button>
+            </form>
+        </div>
+    </div>
+</nav>
